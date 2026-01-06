@@ -3,16 +3,21 @@ import java.util.Random;
 
 public class Carta {
     // Static final para que sea por clase (no por objetos) y para no malgastar espacio en memoria.
-    private static final String[] VALORES = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+    private static final String[] VALORES = {"2","3","4","5","6","7","8","9","T","J","Q","K","A"};
     private static final String[] PALOS = {"S", "D", "H", "C"};
     
     private String valor;
     private String palo;
 
+    // Constructor de la carta
     public Carta(String valor, String palo) {
         this.valor = valor;
         this.palo = palo;
     }
+    // Getters de los datos de la carta
+    public String getValor() { return valor; }
+    public String getPalo() { return palo; }
+
 
     private static final Random random = new Random(); // Random para la clase
 

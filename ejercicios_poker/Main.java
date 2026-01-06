@@ -12,10 +12,11 @@ public class Main {
         }
 
         // Mostrar las 5 cartas del mazo
-        for (Carta c : mazo) {
-            System.out.println("Las cartas del mazo son: ");
-            System.out.println(c);
+        System.out.println("Las cartas del mazo son: ");
+        for (int j = 0; j < mazo.length; j++) {  
+            System.out.println(mazo[j]);  
         }
-        
+
+        Poker.verificarJugada(mazo);
     }
 }
