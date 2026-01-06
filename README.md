@@ -1,3 +1,3 @@
-#### BOOTCAMP ROSHKA 2026
+# BOOTCAMP ROSHKA 2026
 
-## Contiene todo lo desarrollado durante la duracion del Bootcamp.
+#### Contiene todo lo desarrollado durante la duracion del Bootcamp.
