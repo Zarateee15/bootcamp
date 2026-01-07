@@ -107,13 +107,14 @@ public class Poker {
     }
 
     public static void jugadasPosibles(Boolean esColor, Boolean esEscalera, Boolean esPoker, Boolean esTrio, Boolean esFull, Boolean esParDoble, Boolean esPar){
-        if((esColor) && (esEscalera)){ System.out.println("Se puede jugar escalera color!"); } 
-        if (esColor) { System.out.println("Se puede jugar color!"); }
-        if (esEscalera) { System.out.println("Se puede jugar escalera!"); }
-        if (esPoker) { System.out.println("Se puede jugar Poker!"); }
-        if (esTrio) { System.out.println("Se puede jugar Trio!"); }
-        if (esFull) { System.out.println("Se puede jugar Full!"); }
-        if (esParDoble) { System.out.println("Se puede jugar Par Doble!"); }
-        if (esPar) { System.out.println("Se puede jugar Par!"); }
+        if((esColor) && (esEscalera)){ System.out.println("Se puede jugar Escalera Color!"); } 
+        else if (esPoker) { System.out.println("Se puede jugar Poker!"); }
+        else if (esFull) { System.out.println("Se puede jugar Full House!"); }
+        else if (esColor) { System.out.println("Se puede jugar Color!"); }
+        else if (esEscalera) { System.out.println("Se puede jugar Escalera!"); }
+        else if (esTrio) { System.out.println("Se puede jugar Trio!"); }
+        else if (esParDoble) { System.out.println("Se puede jugar Par Doble!"); }
+        else if (esPar) { System.out.println("Se puede jugar Par!"); }
+        else { System.out.println("Se puede jugar Carta!"); }
 }
 }
