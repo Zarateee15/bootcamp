@@ -1,0 +1,118 @@
+
+/* Cambia la letra y el color de fondo del body */
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #d5e2ee;
+  padding: 30px 12px;
+}
+
+/* Estilos para el div que contiene a la tabla */
+.tabla-container{
+  max-width: 1300px;     
+  margin: 0 auto;       
+  overflow-x: auto ;     
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  background: white;
+}
+
+/* Estilos para la tabla como tal */
+.tabla{
+  font-size: 17px;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 14px;
+  overflow: hidden; 
+}
+/* th = table header (encabezados) */
+/* th = table row (filas de la tabla) */
+/* td = table data (datos) */
+
+/* Estila a los "th = encabezados" que estan dentro del primer "tr = filas" (first child) */
+.tabla tr:first-child th{
+  background: #0f172a;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding: 14px;
+}
+
+/* Estila a los encabezados de la tabla */
+.tabla th{
+  background: #eaf2ff;
+  color: #0f172a;
+  font-weight: 700;
+  text-align: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #dbe5f5;
+}
+
+/* Estila a los datos de la tabla */
+.tabla td{
+  padding: 12px 10px;
+  border-bottom: 1px solid #eef2f7;
+  color: #111827;
+  text-align: center;
+}
+
+/* Cada fila de diferente color (efecto zebra) */
+.tabla tr:nth-child(even) td{
+  background: #fafafa;
+}
+
+/* Resalta una fila al pasar encima el mouse */
+.tabla tr:hover td{
+  background: #f1f5f9;
+}
+
+/* Alinea las filas de la columna 3 a la izquierda */
+.tabla td:nth-child(3){
+  text-align: left;
+}
+
+/* Alinea las filas de la columna 2 a la derecha */
+.tabla td:nth-child(2){
+    text-align: right;
+}
+
+
+/* Estila a los emojis */
+.emojis{
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+/* Estila la forma en que se muestran los iconos */
+.iconos{
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Estila a los iconos individualmente */
+.icono{
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Colores para los iconos segun sean Victoria, Derrota o Empate */
+.icono.g{ background: #22c55e; } 
+.icono.e{ background: #a3a3a3; } 
+.icono.d{ background: #ef4444; } 
+
+
+.club{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.club-icon{
+  width: 40px;
+  height: 40px;
+  object-fit: contain; /* que no se deformen */
+}
