@@ -1,0 +1,218 @@
+
+
+/* =========================================================
+                    Generales
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.mainBody {
+  /* background-image: url("../tateti.jpg"); */
+  background-color: #d5e2ee;
+  color: #111827;
+}
+
+/* Parte general del selector de modo de juego*/
+.mdj-contenedor {
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mdj-carta {
+  background: #ffffff;
+  padding: 40px 48px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+  width: 100%;
+  max-width: 420px;
+}
+
+.mdj-titulo {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* =========================================================
+                         Botones
+   ========================================================= */
+
+/* Parte de boton seleccionar*/
+.btn-primario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  background: linear-gradient(90deg, #a0a98d, #cd6531);
+  box-shadow: 0 10px 25px rgba(0, 119, 130, 0.35);
+}
+
+.btn-secundario {
+  width: auto;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  color: #374151;
+  font-size: 0.85rem;
+}
+
+.btn-primario:hover{
+  filter: brightness(1.05);
+}
+
+/* =========================================================
+                    Campos de seleccion
+   ========================================================= */
+
+.mdj-seleccion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+#campoSeleccionar{
+    padding: 14px;
+}
+
+.mdj-seleccion input,
+.mdj-seleccion select {
+  border-radius: 10px;
+  border: 1px solid #d0d5dd;
+  padding: 8px 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+.mdj-seleccion input:focus,
+.mdj-seleccion select:focus {
+  border-color: #008b8f;
+  box-shadow: 0 0 0 1px rgba(0, 138, 135, 0.2);
+}
+
+/* =========================================================
+                    Modal para ingresar datos
+   ========================================================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.modal-fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+/* Contenedor base del modal */
+.modal-dialog {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px 22px;
+  width: 720px; /* tamaño base, se sobreescribe para el de pacientes */
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  z-index: 41;
+}
+
+/* Título del modal */
+.modal-titulo {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.modal-acciones {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-acciones .btn-secundario {
+  width: auto;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  color: #374151;
+  font-size: 0.85rem;
+}
+
+.modal-acciones .btn-secundario:hover {
+  background: #f3f4f6;
+}
+
+.hidden {
+  display: none;
+}
+
+/* =========================================================
+                    Juego
+   ========================================================= */
+
+/* Cambia la letra y el color de fondo del body */
+.body-juego{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #d5e2ee;
+  padding: 30px 12px;
+}
+
+/* Estilos para el div que contiene a la tabla */
+.tabla-container{
+  width: 600px; 
+  height: 650px;;    
+  margin: 0 auto;       
+  overflow-x: auto ;     
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  background: white;
+}
+
+/* Estilos para la tabla como tal */
+.tabla{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.tabla tr:first-child th{
+  background: #0f172a;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding: 14px;
+}
+
+.tabla td:nth-child(2){
+}
+
+.tabla td:nth-child(3){
+}
+
+.tabla td:nth-child(4){
+}
+
+

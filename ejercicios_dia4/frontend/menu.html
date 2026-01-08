@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>TATETI</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body class="mainBody">
+        <!-- Contenedor principal centrado -->
+        <div class="mdj-contenedor">
+            <div class="mdj-carta">
+                <!-- Seleccion modo de juego -->
+                <h1 class="mdj-titulo">TA-TE-TI!</h1>
+                <h3 class="">Elige el modo de juego:</h3>
+                
+                <!--  Opciones de juego -->
+                <div class="mdj-seleccion" id="campoSeleccionar">
+                    <select id="opcion" required>
+                    <option value="jcj">Jugador vs Jugador</option>
+                    <option value="jcc">Jugador vs Computadora</option>
+                    </select>
+                </div>
+
+                <!-- Botón de acción + placeholder de error -->
+                <button class="btn-primario" id="btnSeleccionar">Seleccionar</button>
+
+
+
+                <div class="modal hidden" id="modalDatosJugadores">
+                    <div class="modal-fondo"></div>
+
+                    <div class="modal-dialog">
+                        <h3 class="modal-titulo" id="modalTitulo">Ingresar Datos</h3>
+
+                        <form id="datosJugadores">
+                            <div class="mdj-seleccion">
+                                <label for="nombre">Nombre del Primer Jugador</label>
+                                <input type="text" id="nombre1" required />
+                            </div>
+
+                            <div class="mdj-seleccion">
+                                <label for="ficha">Ficha</label>
+                                <select id="ficha1" required>
+                                <option value="jugarX">Jugar con X</option>
+                                <option value="jugarY">Jugar con O</option>
+                                </select>
+                            </div>
+
+                            <div class="mdj-seleccion">
+                                <label for="nombre">Nombre del Segundo Jugador</label>
+                                <input type="text" id="nombre2" required />
+                            </div>
+
+                            <div class="mdj-seleccion">
+                                <label for="ficha">Ficha</label>
+                                <select id="ficha2" required>
+                                <option value="jugarX">Jugar con X</option>
+                                <option value="jugarY">Jugar con O</option>
+                                </select>
+                            </div>
+
+                            <div class="modal-acciones">
+                                <button type="button" class="btn-secundario" id="btnCancelar">
+                                Cancelar
+                                </button>
+                                <button type="submit" class="btn-primario">
+                                Jugar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="../backend/main.js"></script>
+        
+    </body>
+</html>
+
