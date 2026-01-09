@@ -27,13 +27,13 @@
 
 
 
-                <div class="modal hidden" id="modalDatosJugadores">
+                <div class="modal hidden" id="modalDatosJcj">
                     <div class="modal-fondo"></div>
 
                     <div class="modal-dialog">
                         <h3 class="modal-titulo" id="modalTitulo">Ingresar Datos</h3>
 
-                        <form id="datosJugadores">
+                        <form id="datosJcj">
                             <div class="mdj-seleccion">
                                 <label for="nombre">Nombre del Primer Jugador</label>
                                 <input type="text" id="nombre1" required />
@@ -67,6 +67,35 @@
                                 <button type="submit" class="btn-primario">
                                 Jugar
                                 </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="modal hidden" id="modalDatosJcc">
+                    <div class="modal-fondo"></div>
+
+                    <div class="modal-dialog">
+                        <h3 class="modal-titulo" id="modalTitulo">Ingresar Datos</h3>
+
+                        <form id="datosJcc">
+                            <div class="mdj-seleccion">
+                                <label for="nombre">Nombre del Jugador</label>
+                                <input type="text" id="nombre" required />
+                            </div>
+
+                            <div class="mdj-seleccion">
+                                <label for="ficha">Ficha</label>
+                                <select id="ficha" required>
+                                <option value="jugarX">Jugar con X</option>
+                                <option value="jugarY">Jugar con O</option>
+                                </select>
+                            </div>
+
+                            <div class="modal-acciones">
+                                <button type="button" class="btn-secundario btnCancelar">Cancelar</button>
+                                <button type="submit" class="btn-primario">Jugar</button>
                             </div>
                         </form>
                     </div>
