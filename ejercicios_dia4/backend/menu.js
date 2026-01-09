@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const jugador2 = { nombre: nombre2, ficha: ficha2 === "jugarX" ? "X" : "O" };
 
     sessionStorage.setItem("tateti_config", JSON.stringify({ modo, jugador1, jugador2 }));
-    window.location.href = "../frontend/jcj.html";
+    window.location.href = "../frontend/tateti.html";
   });
 
   // submit JCC
@@ -69,6 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const jugador2 = { nombre: "Computadora", ficha: jugador1.ficha === "X" ? "O" : "X" };
 
     sessionStorage.setItem("tateti_config", JSON.stringify({ modo, jugador1, jugador2 }));
-    window.location.href = "../frontend/jcc.html";
+    window.location.href = "../frontend/tateti.html";
   });
 });
