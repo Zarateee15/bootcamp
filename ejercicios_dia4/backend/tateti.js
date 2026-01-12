@@ -47,19 +47,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return null;
   }
 
+  // Marca la linea de la jugada ganadora
   function marcarGanadores(indices) {
     indices.forEach(idx => celdas[idx].classList.add("jugada-ganadora"));
   }
 
+  // Limpia las celdas
   function limpiarGanadores() {
     celdas.forEach(td => td.classList.remove("jugada-ganadora"));
   }
 
+  // Para mostrar el boton Reiniciar cuando termina el juego
   function mostrarReiniciar() {
     btnReiniciar.classList.remove("hidden");
     btnReiniciar?.addEventListener("click", () => reiniciarJuego());
   }
 
+  // Resetea el juego
   function reiniciarJuego() {
     limpiarGanadores()
     terminaJuego = false;
@@ -82,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
   }
 
+  // Para jugar una ficha: Pinta las celdas, actualiza los turnos y verifica si gano alguien o es empate
   function jugarFicha(i) {
     // Si terminaJuego = true, el juego termina
     if (terminaJuego) return;
@@ -92,13 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Animación "pop" al colocar una ficha
     celdas[i].classList.remove("pop");
-    void celdas[i].offsetWidth; // fuerza reflow para reiniciar la animación
+    void celdas[i].offsetWidth; 
     celdas[i].classList.add("pop");
 
     // Colores por ficha
     celdas[i].classList.remove("x", "o");
     celdas[i].classList.add(tablero[i] === "X" ? "x" : "o");
 
+    // Mensaje para la alerta en gameOver
     const mp = matchPoint();
     if (mp){
       marcarGanadores(mp.indices);
@@ -117,19 +123,59 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Encuntra las posibles jugadas ganadoras del Jugador
+  function encontrarJugada(tablero, gameMoves, ficha) {
+    for (const [a, b, c] of gameMoves) {
+      const trio = [tablero[a], tablero[b], tablero[c]];
+
+      const cantFicha = trio.filter(v => v === ficha).length;
+      const cantVacias = trio.filter(v => v === "").length;
+
+      if (cantFicha === 2 && cantVacias === 1) {
+        if (tablero[a] === "") return a;
+        if (tablero[b] === "") return b;
+        if (tablero[c] === "") return c;
+      }
+    }
+    return null;
+  }
+
+  // Para cuando sea Jugador vs Computadora
   function turnoComputadora() {
     // Si terminaJuego = true, el juego termina
     if (terminaJuego) return;
 
-    // Array con las celdas disponibles del tablero
+    // La ficha del jugador y de la computadora
+    const miFicha = jugadores[jugadorActual].ficha;
+    const fichaRival = jugadores[1 - jugadorActual].ficha;
+
+    // Posibles jugadas ganadoras
+    const gameMoves = movimientosGanadores;
+
+    // Si tiene una jugada ganadora
+    let jugada = encontrarJugada(tablero, gameMoves, miFicha);
+    if (jugada !== null) return jugarFicha(jugada);
+
+    // Impide que ganes
+    jugada = encontrarJugada(tablero, gameMoves, fichaRival);
+    if (jugada !== null) return jugarFicha(jugada);
+
+    // Pone en el centro
+    if (tablero[4] === "") return jugarFicha(4);
+
+    // Pone en las esquinas
+    const esquinas = [0, 2, 6, 8].filter(i => tablero[i] === "");
+    if (esquinas.length) {
+      const i = esquinas[Math.floor(Math.random() * esquinas.length)];
+      return jugarFicha(i);
+    }
+
+    // Pone en cualquiera que encuentre libre
     const libres = tablero
       .map((v, i) => (v === "" ? i : null))
       .filter(i => i !== null);
 
-    //Si no hay celdas libres, termina el juego
-    if (libres.length === 0) return;
-
-    // La computadora juega al azar en una de las celdas libres
+    if (!libres.length) return;
     const i = libres[Math.floor(Math.random() * libres.length)];
     jugarFicha(i);
   }

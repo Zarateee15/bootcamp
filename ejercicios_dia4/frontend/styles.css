@@ -84,7 +84,8 @@
 }
 
 #btn-reiniciar{
-  background:  linear-gradient(90deg, #869db8, #46a56c);
+  background:  #ffffff;
+  color: rgb(131, 47, 47);
 }
 
 /* =========================================================
@@ -264,11 +265,11 @@
 
 /* Colores para X y O */
 .x{
-  color: #d17b7b;
+  color: #545196;
   text-shadow: 0 6px 18px rgba(239,68,68,.25);
 }
 .o{
-  color: #d6f452;
+  color: #83876f;
   text-shadow: 0 6px 18px rgba(37,99,235,.22);
 }
 
