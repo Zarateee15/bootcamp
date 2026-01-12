@@ -12,7 +12,7 @@
 
 .mainBody {
   /* background-image: url("../tateti.jpg"); */
-  background-color: #d5e2ee;
+  background: linear-gradient(90deg, #a0a98d, #cd6531);
   color: #111827;
 }
 
@@ -74,6 +74,19 @@
   filter: brightness(1.05);
 }
 
+.div-reiniciar{
+  width: min(520px, 92vw);
+  margin: 14px auto 0;
+  height: auto;           
+  display: flex;
+  justify-content: center; 
+  background: none;
+}
+
+#btn-reiniciar{
+  background:  linear-gradient(90deg, #869db8, #46a56c);
+}
+
 /* =========================================================
                     Campos de seleccion
    ========================================================= */
@@ -108,6 +121,7 @@
                     Modal para ingresar datos
    ========================================================= */
 
+/* El modal como tal */
 .modal {
   position: fixed;
   inset: 0;
@@ -117,6 +131,7 @@
   z-index: 40;
 }
 
+/* Lo que queda detras del modal*/
 .modal-fondo {
   position: absolute;
   inset: 0;
@@ -129,7 +144,7 @@
   background: #ffffff;
   border-radius: 18px;
   padding: 20px 22px;
-  width: 720px; /* tamaño base, se sobreescribe para el de pacientes */
+  width: 720px;
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
   z-index: 41;
 }
@@ -141,6 +156,7 @@
   font-weight: 600;
 }
 
+/* Botones del modal */
 .modal-acciones {
   margin-top: 12px;
   display: flex;
@@ -148,6 +164,7 @@
   gap: 8px;
 }
 
+/* Boton cancelar del modal*/
 .modal-acciones .btn-secundario {
   width: auto;
   padding: 6px 14px;
@@ -158,6 +175,7 @@
   font-size: 0.85rem;
 }
 
+/* Hover del boton cancelar */
 .modal-acciones .btn-secundario:hover {
   background: #f3f4f6;
 }
@@ -169,24 +187,32 @@
 /* =========================================================
                     Juego
    ========================================================= */
+:root{
+  --cell: rgba(255,255,255,.60);
+  --cellHover: rgba(255,255,255,.85);
+}
 
 /* Cambia la letra y el color de fondo del body */
 .body-juego{
   margin-top: 60px;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #d5e2ee;
+  background: linear-gradient(90deg, #a0a98d, #cd6531);
   padding: 30px 12px;
+  color: #0f172a;
 }
 
 /* Estilos para el div que contiene a la tabla */
 .tabla-container{
-  width: 500px; 
-  height: 500px;;    
-  margin: 0 auto;       
-  overflow-x: auto ;     
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-  background: none;
+  width: min(520px, 92vw);
+  height: min(520px, 92vw);
+  margin: 0 auto;
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, .12);
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden; /* importante para redondeo */
+  border: 1px solid rgba(15,23,42,.08);
 }
 
 /* Estilos para la tabla como tal */
@@ -194,50 +220,77 @@
 .tabla{
   width: 100%;
   height: 100%;
-  /*border-collapse: collapse;  une bordes */
-  background:none;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  border-collapse:separate;  
+  border-spacing: 7px;
+  background:transparent;
+  box-shadow: none;
 }
 
 .tabla tr:first-child th{
-  border: 1px solid #222;
-  background: linear-gradient(90deg, #d6dfc4, #2e1208);
-  box-shadow: 0 10px 25px rgba(0, 119, 130, 0.35);
-  color: rgb(243, 235, 235);
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(214,223,196,.9), rgba(46,18,8,.9));
+  color: rgba(248, 248, 248, 0.95);
   font-size: 20px;
   text-align: center;
-  padding: 14px;
+  padding: 16px;
+  letter-spacing: .3px;
+  text-shadow: 0 2px 10px rgba(0,0,0,.25);
 }
 
 
 .tabla td{
-  background:linear-gradient(90deg, #f3e9e2, #a898bb);
-  width: 135px;
-  height: 135px;
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(245,245,255,.55));
+  width: 120px;
+  height: 125px;
   text-align: center;
   vertical-align: middle;
-  font-size: 64px;
-  font-weight: 700;
+  font-size: clamp(48px, 6vw, 70px);
+  font-weight: 800;
   cursor: pointer;
   user-select: none;
-  border: 1px solid #222; /* líneas del tablero */
-  border-radius: 5%;
+  border: none;                       /* adiós líneas duras */
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, .12);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
 }
 
-/* hover lindo */
+/* Hover para las celdas */
 .tabla td:hover{
-  background:#f2eded;
+  background: rgba(255,255,255,.85);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(15,23,42,.18);
 }
 
-/* opcional: colores para X y O */
-.x{ color:#e63946; }
-.o{ color:#1d3557; }
-
-.tabla td:nth-child(2){
+/* Colores para X y O */
+.x{
+  color: #d17b7b;
+  text-shadow: 0 6px 18px rgba(239,68,68,.25);
+}
+.o{
+  color: #d6f452;
+  text-shadow: 0 6px 18px rgba(37,99,235,.22);
 }
 
-.tabla td:nth-child(3){
+@keyframes pop {
+  0% { transform: scale(.85); opacity: .5; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.pop { animation: pop .18s ease-out; }
+
+/* Resaltado de celdas ganadoras */
+.jugada-ganadora{
+  outline: 3px solid rgba(34, 197, 94, .9); /* verde */
+  box-shadow: 0 0 0 6px rgba(34, 197, 94, .20), 0 14px 30px rgba(15,23,42,.18);
+  transform: translateY(-2px);
 }
 
-.tabla td:nth-child(4){
+/* opcional: brillo suave animado */
+@keyframes glow {
+  0% { box-shadow: 0 0 0 6px rgba(34,197,94,.18), 0 14px 30px rgba(15,23,42,.18); }
+  100%{ box-shadow: 0 0 0 10px rgba(34,197,94,.10), 0 18px 40px rgba(15,23,42,.20); }
+}
+.jugada-ganadora{
+  animation: glow .6s ease-in-out infinite alternate;
 }

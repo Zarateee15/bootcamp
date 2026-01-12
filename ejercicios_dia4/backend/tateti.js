@@ -16,9 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Array con los jugadores
   const jugadores = [jugador1, jugador2];
 
+  const btnReiniciar = document.getElementById("reiniciar");
+
   // Simula el tablero vacio
   let tablero = Array(9).fill("");
-  // Jugador actual a jugar
+  // Turno de cada jugador
   let jugadorActual = 0;
   // Cuando se hace un movimiento ganador cambia a true y termina el juego
   let terminaJuego = false;
@@ -32,53 +34,104 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Actualiza el turno del jugador segun se vaya jugando
   function actualizarTurno() {
-    turnoTexto.textContent = `Turno de: ${jugadores[jugadorActual].nombre} (${jugadores[jugadorActual].ficha})`;
+    turnoTexto.textContent = `Turno de ${jugadores[jugadorActual].nombre}`;
   }
 
   // Recorre las combinaciones ganadoras, si coincide retorna X u O, sino null
   function matchPoint() {
     for (const [a,b,c] of movimientosGanadores) {
-      if (tablero[a] && tablero[a] === tablero[b] && tablero[a] === tablero[c]) return tablero[a];
+      if (tablero[a] && tablero[a] === tablero[b] && tablero[a] === tablero[c]) {
+        return { ficha: tablero[a], indices: [a,b,c] };
+      }
     }
     return null;
+  }
+
+  function marcarGanadores(indices) {
+    indices.forEach(idx => celdas[idx].classList.add("jugada-ganadora"));
+  }
+
+  function limpiarGanadores() {
+    celdas.forEach(td => td.classList.remove("jugada-ganadora"));
+  }
+
+  function mostrarReiniciar() {
+    btnReiniciar.classList.remove("hidden");
+    btnReiniciar?.addEventListener("click", () => reiniciarJuego());
+  }
+
+  function reiniciarJuego() {
+    limpiarGanadores()
+    terminaJuego = false;
+    tablero = Array(9).fill("");
+    celdas.forEach(c => {
+      c.textContent = "";
+      c.classList.remove("x","o","jugada-ganadora","pop");
+    });
+    location.reload();
+    window.location.href = "../frontend/menu.html";
   }
 
   // Alerta si termina el juego
   function gameOver(msg) {
     terminaJuego = true;
-    alert(msg);
+
+    setTimeout(() => {
+      alert(msg);
+      mostrarReiniciar();
+    }, 200);
   }
 
-  function playAt(i) {
+  function jugarFicha(i) {
+    // Si terminaJuego = true, el juego termina
     if (terminaJuego) return;
     if (tablero[i] !== "") return;
 
     tablero[i] = jugadores[jugadorActual].ficha;
     celdas[i].textContent = tablero[i];
 
-    const game = matchPoint();
-    if (game) return gameOver(`Ganó: ${jugadores[jugadorActual].nombre} (${game})`);
+    // Animación "pop" al colocar una ficha
+    celdas[i].classList.remove("pop");
+    void celdas[i].offsetWidth; // fuerza reflow para reiniciar la animación
+    celdas[i].classList.add("pop");
+
+    // Colores por ficha
+    celdas[i].classList.remove("x", "o");
+    celdas[i].classList.add(tablero[i] === "X" ? "x" : "o");
+
+    const mp = matchPoint();
+    if (mp){
+      marcarGanadores(mp.indices);
+      return gameOver(`Ganó ${jugadores[jugadorActual].nombre}!`);
+    }
 
     if (tablero.every(v => v !== "")) return gameOver("Empate kps");
 
+    // Cambia el turno al otro jugador
     jugadorActual = 1 - jugadorActual;
     actualizarTurno();
 
-    // Turno de la compu (jcc)
+    // Turno de la computadora
     if (modo === "jcc" && jugadores[jugadorActual].nombre.toLowerCase() === "computadora") {
-      setTimeout(cpuMoveRandom, 250);
+      setTimeout(turnoComputadora, 450);
     }
   }
 
-  function cpuMoveRandom() {
+  function turnoComputadora() {
+    // Si terminaJuego = true, el juego termina
     if (terminaJuego) return;
+
+    // Array con las celdas disponibles del tablero
     const libres = tablero
       .map((v, i) => (v === "" ? i : null))
       .filter(i => i !== null);
 
+    //Si no hay celdas libres, termina el juego
     if (libres.length === 0) return;
+
+    // La computadora juega al azar en una de las celdas libres
     const i = libres[Math.floor(Math.random() * libres.length)];
-    playAt(i);
+    jugarFicha(i);
   }
 
   // Clicks en celdas
@@ -86,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     td.addEventListener("click", () => {
       // Si es turno de la compu, no dejamos jugar
       if (modo === "jcc" && jugadores[jugadorActual].nombre.toLowerCase() === "computadora") return;
-      playAt(i);
+      jugarFicha(i);
     });
   });
 

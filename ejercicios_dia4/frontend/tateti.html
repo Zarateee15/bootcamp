@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jugador vs Jugador</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jugador vs Jugador</title>
 
-    <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="body-juego">
-    <div class="tabla-container">
-        <table class="tabla">
-            <tr>
-                <th colspan="3" id="turnoTexto">Turno de</th>
-            </tr>
-            <tr>
-                <td class="celda"></td>
-                <td class="celda"></td>
-                <td class="celda"></td>
-            </tr>
-            <tr>
-                <td class="celda"></td>
-                <td class="celda"></td>
-                <td class="celda"></td>
-            </tr>
-            <tr>
-                <td class="celda"></td>
-                <td class="celda"></td>
-                <td class="celda"></td>
-            </tr>
-        </table>
-    </div>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
 
-    <script src="../backend/tateti.js"></script>
+    <body class="body-juego">
+        <div class="tabla-container">
+            <!-- Tabla que simula el tablero  -->
+            <table class="tabla">
+                <tr>
+                    <th colspan="3" id="turnoTexto">Turno de</th>
+                </tr>
 
-</body>
+                <!-- Celdas del tablero  -->
+                <tr>
+                    <td class="celda"></td>
+                    <td class="celda"></td>
+                    <td class="celda"></td>
+                </tr>
+                <tr>
+                    <td class="celda"></td>
+                    <td class="celda"></td>
+                    <td class="celda"></td>
+                </tr>
+                <tr>
+                    <td class="celda"></td>
+                    <td class="celda"></td>
+                    <td class="celda"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="div-reiniciar hidden" id="reiniciar">
+            <button class="btn-primario" id="btn-reiniciar">Reiniciar</button>
+        </div>
+
+        <!-- Script para la logica del tablero  -->
+        <script src="../backend/tateti.js"></script>
+
+    </body>
 </html>

@@ -2,37 +2,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectModo = document.getElementById("opcion");
   const btnSeleccionar = document.getElementById("btnSeleccionar");
 
+  // Datos de los modales y formularios
   const modalJcj = document.getElementById("modalDatosJcj");
   const modalJcc = document.getElementById("modalDatosJcc");
-
   const formJcj = document.getElementById("datosJcj");
   const formJcc = document.getElementById("datosJcc");
 
-  function abrirModalCorrecto() {
+  // Funcion para abrir el modal
+  function abrirModal() {
     const modo = selectModo.value;
     const modal = (modo === "jcj") ? modalJcj : modalJcc;
     modal.classList.remove("hidden");
   }
 
+  // Funcion para cerrar el modal
   function cerrarModal(modal) {
     modal.classList.add("hidden");
     const form = modal.querySelector("form");
     form?.reset();
   }
 
-  // abrir modal según opción actual
-  btnSeleccionar.addEventListener("click", abrirModalCorrecto);
+  // Abrir el modal correcto
+  btnSeleccionar.addEventListener("click", abrirModal);
 
-  // cancelar / fondo para cada modal
+  // Boton cancelar o tocar el fondo oscuro para salir
   [modalJcj, modalJcc].forEach((modal) => {
-    const btnCancelar = modal.querySelector(".btnCancelar"); // mejor clase, no id repetido
-    const fondo = modal.querySelector(".modal-fondo");
+    const btnCancelar = modal.querySelector(".btnCancelar"); 
 
     btnCancelar?.addEventListener("click", () => cerrarModal(modal));
-    fondo?.addEventListener("click", () => cerrarModal(modal));
   });
 
-  // submit JCJ
+  // Formulario Jugador vs Jugador
   formJcj.addEventListener("submit", (e) => {
     e.preventDefault();
     const modo = "jcj";
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "../frontend/tateti.html";
   });
 
-  // submit JCC
+  // Formulario Jugador vs Computadora
   formJcc.addEventListener("submit", (e) => {
     e.preventDefault();
     const modo = "jcc";

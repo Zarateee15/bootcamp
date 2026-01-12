@@ -22,17 +22,18 @@
                     </select>
                 </div>
 
-                <!-- Botón de acción + placeholder de error -->
+                <!-- Botón de acción  -->
                 <button class="btn-primario" id="btnSeleccionar">Seleccionar</button>
 
 
-
+                <!-- Modal para Jugador vs Jugador  -->
                 <div class="modal hidden" id="modalDatosJcj">
                     <div class="modal-fondo"></div>
 
                     <div class="modal-dialog">
                         <h3 class="modal-titulo" id="modalTitulo">Ingresar Datos</h3>
 
+                        <!-- Formulario de datos para Jugador vs Jugador  -->
                         <form id="datosJcj">
                             <div class="mdj-seleccion">
                                 <label for="nombre">Nombre del Primer Jugador</label>
@@ -72,13 +73,14 @@
                     </div>
                 </div>
 
-
+                <!-- Modal para Jugador vs Computadora  -->
                 <div class="modal hidden" id="modalDatosJcc">
                     <div class="modal-fondo"></div>
 
                     <div class="modal-dialog">
                         <h3 class="modal-titulo" id="modalTitulo">Ingresar Datos</h3>
 
+                        <!-- Formulario de datos para Jugador vs Computadora  -->
                         <form id="datosJcc">
                             <div class="mdj-seleccion">
                                 <label for="nombre">Nombre del Jugador</label>
@@ -104,6 +106,7 @@
             </div>
         </div>
 
+        <!-- Script para la logica de los modales y formularios  -->
         <script src="../backend/menu.js"></script>
         
     </body>
