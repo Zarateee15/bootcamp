@@ -1,3 +1,4 @@
+CREATE SCHEMA IF NOT EXISTS "Ejercicio4";
 
 -- =========================
 -- Catálogos

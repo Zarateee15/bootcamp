@@ -1,3 +1,4 @@
+CREATE SCHEMA IF NOT EXISTS "Ejercicio5";
 
 -- =========================
 -- Base
