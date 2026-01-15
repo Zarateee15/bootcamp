@@ -1,4 +1,4 @@
-package ejercicios_poker;
+package ejercicios_dia2_poker;
 
 public class Main {
     public static void main(String[] args) {

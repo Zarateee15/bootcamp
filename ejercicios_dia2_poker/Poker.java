@@ -1,4 +1,4 @@
-package ejercicios_poker;
+package ejercicios_dia2_poker;
 import java.util.*;
 
 public class Poker {
