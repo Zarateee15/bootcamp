@@ -41,10 +41,10 @@ public class ProfesorDAO {
         }
     }
 
-    public int crearProfesor(String nombre, long cedula) {
+    public void crearProfesor(String nombre, long cedula) {
         String sql =
             "INSERT INTO \"Ejercicio5\".\"Profesor\" (\"nombre\", \"cedula\") " +
-            "VALUES (?, ?) RETURNING \"idProfesor\"";
+            "VALUES (?, ?)";
 
         try (Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)) {
@@ -52,35 +52,14 @@ public class ProfesorDAO {
             ps.setString(1, nombre);
             ps.setLong(2, cedula);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("idProfesor");
-                }
-                return -1;
-            }
+            ps.executeQuery();
+            System.out.println("Profesor creado correctamente.");    
 
         } catch (Exception e) {
             System.out.println("Error creando profesor: " + e.getMessage());
-            return -1;
         }
     }
 
-    public boolean eliminarProfesor(int idProfesor) {
-        String sql =
-            "DELETE FROM \"Ejercicio5\".\"Profesor\" WHERE \"idProfesor\" = ?";
-
-        try (Connection con = Conexion.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setInt(1, idProfesor);
-            int filas = ps.executeUpdate();
-            return filas > 0;
-
-        } catch (Exception e) {
-            System.out.println("Error eliminando profesor: " + e.getMessage());
-            return false;
-        }
-    }
 
     public boolean actualizarProfesor(int idProfesor, String nombre, Long cedula) {
         // Usamos Long para permitir null (si no querés actualizar cedula)

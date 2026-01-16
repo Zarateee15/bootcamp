@@ -41,10 +41,10 @@ public class PrestamoDAO {
         }
     }
 
-    public int crearPrestamo(String fechaPrestamo, int idProfesor) {
+    public void crearPrestamo(String fechaPrestamo, int idProfesor) {
         String sql =
             "INSERT INTO \"Ejercicio5\".\"Prestamo\" (\"fechaPrestamo\", \"idProfesor\") " +
-            "VALUES (?, ?) RETURNING \"idPrestamo\"";
+            "VALUES (?, ?)";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -53,30 +53,11 @@ public class PrestamoDAO {
             ps.setDate(1, java.sql.Date.valueOf(fechaPrestamo)); // formato: yyyy-MM-dd
             ps.setInt(2, idProfesor);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt("idPrestamo");
-                return -1;
-            }
+            ps.executeQuery();
+            System.out.println("Prestamo creado correctamente."); 
 
         } catch (Exception e) {
             System.out.println("Error creando prestamo: " + e.getMessage());
-            return -1;
-        }
-    }
-
-    public boolean eliminarPrestamo(int idPrestamo) {
-        String sql =
-            "DELETE FROM \"Ejercicio5\".\"Prestamo\" WHERE \"idPrestamo\" = ?";
-
-        try (Connection con = Conexion.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setInt(1, idPrestamo);
-            return ps.executeUpdate() > 0;
-
-        } catch (Exception e) {
-            System.out.println("Error eliminando prestamo: " + e.getMessage());
-            return false;
         }
     }
 
