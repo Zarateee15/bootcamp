@@ -20,9 +20,6 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Libro{idLibro=" + idLibro +
-                ", nombre='" + nombre + "'" +
-                ", cantidadCopias=" + cantidadCopias +
-                ", idEditorial=" + idEditorial + "}";
+        return idLibro + "\t\t" + cantidadCopias + "\t\t" + nombre + "\t\t" ;
     }
 }

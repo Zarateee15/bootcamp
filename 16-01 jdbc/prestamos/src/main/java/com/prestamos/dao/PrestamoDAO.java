@@ -41,23 +41,26 @@ public class PrestamoDAO {
         }
     }
 
-    public void crearPrestamo(String fechaPrestamo, int idProfesor) {
+    public int crearPrestamo(String fechaPrestamo, int idProfesor) {
         String sql =
             "INSERT INTO \"Ejercicio5\".\"Prestamo\" (\"fechaPrestamo\", \"idProfesor\") " +
-            "VALUES (?, ?)";
+            "VALUES (?, ?) RETURNING \"idPrestamo\" ";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            // Si querés, esto se puede hacer mejor con LocalDate y ps.setDate(...)
             ps.setDate(1, java.sql.Date.valueOf(fechaPrestamo)); // formato: yyyy-MM-dd
             ps.setInt(2, idProfesor);
 
-            ps.executeQuery();
-            System.out.println("Prestamo creado correctamente."); 
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                return rs.getInt(1); // Retorna el id del prestamo creado
+            }
+
 
         } catch (Exception e) {
             System.out.println("Error creando prestamo: " + e.getMessage());
+            return -1;
         }
     }
 

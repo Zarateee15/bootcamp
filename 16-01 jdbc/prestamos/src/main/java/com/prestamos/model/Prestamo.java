@@ -17,8 +17,8 @@ public class Prestamo {
 
     @Override
     public String toString() {
-        return "Prestamo{idPrestamo=" + idPrestamo +
-                ", fechaPrestamo='" + fechaPrestamo + "'" +
-                ", idProfesor=" + idProfesor + "}";
+        return idPrestamo +
+                "   " + fechaPrestamo + "   " +
+                "   " + idProfesor;
     }
 }

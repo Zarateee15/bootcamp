@@ -17,6 +17,6 @@ public class Profesor {
 
     @Override
     public String toString() {
-        return "Profesor{idProfesor=" + idProfesor + ", nombre='" + nombre + "', cedula=" + cedula + "}";
+        return idProfesor + "\t\t" + nombre + "\t\t"+ cedula;
     }
 }

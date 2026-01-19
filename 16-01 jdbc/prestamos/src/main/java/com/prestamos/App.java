@@ -1,5 +1,6 @@
 package com.prestamos;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import com.prestamos.dao.LibroDAO;
 import com.prestamos.dao.EditorialDAO;
 import com.prestamos.dao.CursoDAO;
 import com.prestamos.dao.ColegioDAO;
+import com.prestamos.dao.DetallePrestamoDAO;
 
 import com.prestamos.model.Asignatura;
 import com.prestamos.model.Prestamo;
@@ -20,6 +22,7 @@ import com.prestamos.model.Libro;
 import com.prestamos.model.Editorial;
 import com.prestamos.model.Curso;
 import com.prestamos.model.Colegio;
+import com.prestamos.model.DetallePrestamo;
 
 public class App {
   public static void limpiarPantalla() {
@@ -46,6 +49,7 @@ public class App {
     CursoDAO cursos = new CursoDAO();
     LibroDAO libros = new LibroDAO();
     EditorialDAO editoriales = new EditorialDAO();
+    DetallePrestamoDAO detalles = new DetallePrestamoDAO();
 
     Scanner sc = new Scanner(System.in);
 
@@ -63,14 +67,61 @@ public class App {
     System.out.println("-------------------------------------");
     System.out.print("Ingrese una opcion: ");
 
-    int opc = sc.nextInt();
-    sc.nextLine(); // limpia el Enter
-    limpiarPantalla();
+    int opc = sc.nextInt(); sc.nextLine(); // limpia el Enter
+    //limpiarPantalla();
 
     switch (opc){
-      case 1: 
+      case 1:
+        List<Integer> idProfes = new ArrayList<>();
+        List<Integer> idLibros = new ArrayList<>();
+        String fechaPrestamo = (LocalDate.now()).toString();
 
-        System.out.println("Realizandoooo");
+        System.out.println("Fecha del prestamo: " + fechaPrestamo);
+
+        // Muestra los profes disponibles
+        System.out.println("--------------------------------");
+        System.out.println("ID\t\tPROFESOR\t\tCEDULA ");
+        System.out.println("--------------------------------");
+        for (Profesor p : profesores.listarProfesores()) {
+          System.out.println(p);
+          idProfes.add(p.getIdProfesor());
+        }
+        System.out.println("--------------------------------");
+
+        System.out.print("Elija el ID del profe: ");
+        int profe = sc.nextInt();
+
+        if (!idProfes.contains(profe)){
+          System.out.println("Profesor NO existe :(");
+          break;
+        }
+        int prestamoCreado = prestamos.crearPrestamo(fechaPrestamo,profe); // Se crea el prestamo. FUNCIONA
+
+        // Muestra los libros disponibles
+        System.out.println("----------------------------------");
+        System.out.println("ID  COPIAS\t\t\tLIBRO");
+        System.out.println("----------------------------------");
+        for (Libro lb : libros.listarLibros()) {
+          System.out.println(lb);
+          idLibros.add(lb.getIdLibro());
+        }
+        System.out.println("----------------------------------");
+
+        System.out.print("Elija el ID del libro: ");
+        int libro = sc.nextInt(); sc.nextLine(); // limpia el Enter
+
+        if (!idLibros.contains(libro)){
+          System.out.println("Libro NO existe :(");
+          break;
+        }
+
+        System.out.print("Cantidad a alquilar: ");
+        int cantidad = sc.nextInt(); sc.nextLine(); // limpia el Enter
+
+        int detalleCreado = detalles.crearDetallePrestamo(prestamoCreado, cantidad);
+
+        detalles.crearPrestamoLibro(detalleCreado,libro);
+
         break;
 
       case 2:
@@ -175,15 +226,25 @@ public class App {
           case 1: // Prestamos
 
             for (Prestamo pre : prestamos.listarPrestamos()) {
-              System.out.println(pre);
+              System.out.println("--------------------------------");
+              System.out.println("ID: "+pre.getIdPrestamo()+"\tFecha Prestamo: "+pre.getFechaPrestamo());
+              System.out.println("--------------------------------");
+              for (DetallePrestamo dt : detalles.listarDetalles(pre.getIdPrestamo())) {
+                System.out.println(dt);
+              }
+              System.out.println("--------------------------------");
             }
             break;
           
           case 2: // Profesores
 
+            System.out.println("--------------------------------");
+            System.out.println("ID\t\tPROFESOR\t\tCEDULA ");
+            System.out.println("--------------------------------");
             for (Profesor p : profesores.listarProfesores()) {
               System.out.println(p);
             }
+            System.out.println("--------------------------------");
             break;
 
           case 3: // Asignaturas
