@@ -52,7 +52,7 @@ public class ProfesorDAO {
             ps.setString(1, nombre);
             ps.setLong(2, cedula);
 
-            ps.executeQuery();
+            ps.executeUpdate();
             System.out.println("Profesor creado correctamente.");    
 
         } catch (Exception e) {

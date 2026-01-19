@@ -61,36 +61,5 @@ public class PrestamoDAO {
         }
     }
 
-    // UPDATE PARCIAL: si un parámetro es null, NO se cambia ese campo
-    public boolean actualizarPrestamoParcial(
-            int idPrestamo,
-            String fechaPrestamo,  // null => no cambia
-            Integer idProfesor     // null => no cambia
-    ) {
-        String sql =
-            "UPDATE \"Ejercicio5\".\"Prestamo\" " +
-            "SET \"fechaPrestamo\" = COALESCE(?, \"fechaPrestamo\"), " +
-            "    \"idProfesor\" = COALESCE(?, \"idProfesor\") " +
-            "WHERE \"idPrestamo\" = ?";
 
-        try (Connection con = Conexion.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            // fechaPrestamo: si viene null, dejamos null y COALESCE mantiene el valor
-            if (fechaPrestamo == null) {
-                ps.setObject(1, null);
-            } else {
-                ps.setDate(1, java.sql.Date.valueOf(fechaPrestamo)); // yyyy-MM-dd
-            }
-
-            ps.setObject(2, idProfesor); // Integer permite null
-            ps.setInt(3, idPrestamo);
-
-            return ps.executeUpdate() > 0;
-
-        } catch (Exception e) {
-            System.out.println("Error actualizando prestamo: " + e.getMessage());
-            return false;
-        }
-    }
 }

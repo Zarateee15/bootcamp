@@ -14,6 +14,6 @@ public class Editorial {
 
     @Override
     public String toString() {
-        return "Editorial{idEditorial=" + idEditorial + ", nombre='" + nombre + "'}";
+        return idEditorial + "    " + nombre;
     }
 }

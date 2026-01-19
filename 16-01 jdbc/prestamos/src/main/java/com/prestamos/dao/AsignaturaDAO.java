@@ -40,14 +40,13 @@ public class AsignaturaDAO {
 
     public void crearAsignatura(String nombre) {
         String sql =
-            "INSERT INTO \"Ejercicio5\".\"Asignatura\" (\"nombre\") " +
-            "VALUES (?)";
+            "INSERT INTO \"Ejercicio5\".\"Asignatura\" (\"nombre\") VALUES (?)";
 
         try (Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
 
             ps.setString(1,nombre);
-            ps.executeQuery();
+            ps.executeUpdate();
 
             System.out.println("Asignatura creada correctamente.");
 
