@@ -9,3 +9,4 @@
 #### 12-01 sql_querys: ejercicios basicos sobre querys a una BD
 #### 13-01 sql_normalizacion: ejercicios de normalizacion de varias BD
 #### 16-01 jdbc: implementacion de jdbc "java puro", ejercicio de prestamos de libros a profesores de primaria por parte de una editorial 
+          ####Muy basico, faltan agregar y optimizar muchas cosas 
