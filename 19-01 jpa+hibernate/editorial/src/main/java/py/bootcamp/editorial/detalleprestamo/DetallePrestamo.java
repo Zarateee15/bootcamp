@@ -1,8 +1,9 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.detalleprestamo;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import py.bootcamp.editorial.prestamo.Prestamo;
 
 @Getter
 @Setter
@@ -18,8 +19,8 @@ public class DetallePrestamo {
     @JoinColumn(name = "\"idPrestamo\"", nullable = false)
     private Prestamo idPrestamo;
 
-    @Column(name = "cantidad", nullable = false, length = Integer.MAX_VALUE)
-    private String cantidad;
+    @Column(name = "cantidad", nullable = false)
+    private Integer cantidad;
 
 
 }

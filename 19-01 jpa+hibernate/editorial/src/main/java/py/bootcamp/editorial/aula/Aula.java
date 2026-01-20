@@ -1,4 +1,4 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.aula;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,5 +17,10 @@ public class Aula {
 
     @Column(name = "nombre", nullable = false, length = 10)
     private String nombre;
+
+    @Override
+    public String toString() {
+        return id + " - " + nombre;
+    }
 
 }

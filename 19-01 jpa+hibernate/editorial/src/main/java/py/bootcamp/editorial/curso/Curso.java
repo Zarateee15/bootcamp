@@ -1,4 +1,4 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.curso;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,14 +8,19 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table(name = "\"Asignatura\"")
-public class Asignatura {
+@Table(name = "\"Curso\"")
+public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "\"idAsignatura\"", nullable = false)
+    @Column(name = "\"idCurso\"", nullable = false)
     private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+
+    @Override
+    public String toString() {
+        return id + " - " + nombre;
+    }
 
 }

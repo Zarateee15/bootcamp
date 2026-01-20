@@ -1,10 +1,11 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.prestamo;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
+import py.bootcamp.editorial.profesor.Profesor;
 
 @Getter
 @Setter
@@ -23,5 +24,10 @@ public class Prestamo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "\"idProfesor\"", nullable = false)
     private Profesor idProfesor;
+
+    @Override
+    public String toString() {
+        return id + " - " + fechaPrestamo + " - " + idProfesor;
+    }
 
 }

@@ -1,8 +1,9 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.libro;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import py.bootcamp.editorial.editorial.Editorial;
 
 @Getter
 @Setter
@@ -24,5 +25,10 @@ public class Libro {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "\"idEditorial\"", nullable = false)
     private Editorial idEditorial;
+
+    @Override
+    public String toString() {
+        return id + " - " + nombre + " - " + cantidadCopias;
+    }
 
 }

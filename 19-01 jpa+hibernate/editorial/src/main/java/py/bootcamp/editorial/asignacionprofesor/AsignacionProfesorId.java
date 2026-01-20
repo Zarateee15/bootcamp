@@ -1,4 +1,4 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.asignacionprofesor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

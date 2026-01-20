@@ -1,9 +1,13 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.asignacionprofesor;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import py.bootcamp.editorial.asignatura.Asignatura;
+import py.bootcamp.editorial.aula.Aula;
 import py.bootcamp.editorial.colegio.Colegio;
+import py.bootcamp.editorial.curso.Curso;
+import py.bootcamp.editorial.profesor.Profesor;
 
 @Getter
 @Setter

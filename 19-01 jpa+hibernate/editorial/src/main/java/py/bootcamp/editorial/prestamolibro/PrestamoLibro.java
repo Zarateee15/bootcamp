@@ -1,8 +1,10 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.prestamolibro;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import py.bootcamp.editorial.detalleprestamo.DetallePrestamo;
+import py.bootcamp.editorial.libro.Libro;
 
 @Getter
 @Setter

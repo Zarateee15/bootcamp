@@ -1,4 +1,4 @@
-package py.bootcamp.editorial.entity;
+package py.bootcamp.editorial.profesor;
 
 import jakarta.persistence.*;
 
@@ -22,5 +22,10 @@ public class Profesor {
 
     @Column(name = "cedula", nullable = false, precision = 7)
     private BigDecimal cedula;
+
+    @Override
+    public String toString() {
+        return id + " - " + nombre + " - " + cedula;
+    }
 
 }
