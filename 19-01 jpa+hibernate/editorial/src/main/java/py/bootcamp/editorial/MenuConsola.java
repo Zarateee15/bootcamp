@@ -240,7 +240,7 @@ public class MenuConsola implements CommandLineRunner {
             switch (op) {
                 case 1 -> asignaturaController.listar().forEach(System.out::println);
                 case 2 -> {
-                    System.out.print("Nombre del Colegio: ");
+                    System.out.print("Nombre de la Asignatura: ");
                     String nombre = sc.nextLine();
                     try {
                         System.out.println("Creado: " + asignaturaController.crear(nombre));
@@ -269,7 +269,7 @@ public class MenuConsola implements CommandLineRunner {
             switch (op) {
                 case 1 -> aulaController.listar().forEach(System.out::println);
                 case 2 -> {
-                    System.out.print("Nombre del Colegio: ");
+                    System.out.print("Nombre del Aula: ");
                     String nombre = sc.nextLine();
                     try {
                         System.out.println("Creado: " + aulaController.crear(nombre));
@@ -329,7 +329,7 @@ public class MenuConsola implements CommandLineRunner {
             switch (op) {
                 case 1 -> editorialController.listar().forEach(System.out::println);
                 case 2 -> {
-                    System.out.print("Nombre del Curso: ");
+                    System.out.print("Nombre de la Editorial: ");
                     String nombre = sc.nextLine();
                     try {
                         System.out.println("Creado: " + editorialController.crear(nombre));
@@ -358,16 +358,25 @@ public class MenuConsola implements CommandLineRunner {
             switch (op) {
                 case 1 -> libroController.listar().forEach(System.out::println);
                 case 2 -> {
-                    System.out.print("Creando libro...."); // TODO: Agregar parte de editorial
-                    //System.out.print("Nombre del Libro: ");
-                    //String nombre = sc.nextLine();
-                    //System.out.print("Cantidad de copias: ");
-                    //Integer cantidadCopias = Integer.parseInt(sc.nextLine());
-                    //try {
-                    //    System.out.println("Creado: " + libroController.crear(nombre,cantidadCopias));
-                    //} catch (Exception e) {
-                    //    System.out.println("Error: " + e.getMessage());
-                    //}
+                    // System.out.print("Creando libro....");  TODO: Agregar parte de editorial
+                    System.out.print("Nombre del Libro: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Cantidad de copias: ");
+                    Integer cantidadCopias = Integer.parseInt(sc.nextLine());
+                    System.out.println("\n-----------------------");
+                    System.out.println("       Nuevo Prestamo");
+                    System.out.println("-----------------------");
+                    editorialController.listar().forEach(System.out::println);
+                    System.out.println("-----------------------");
+
+                    
+                    System.out.print("Seleccione el ID de la Editorial: ");
+                    Integer idEditorial = Integer.parseInt(sc.nextLine());
+                    try {
+                        System.out.println("Creado: " + libroController.crear(nombre,cantidadCopias,idEditorial));
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                 }
                 default -> System.out.println("Opcion invalida");
             }

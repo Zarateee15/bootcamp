@@ -16,7 +16,7 @@ public class LibroController {
         return service.listar();
     }
 
-    public Libro crear(String nombre,Integer cantidadCopias) {
-        return service.crear(nombre,cantidadCopias);
+    public Libro crear(String nombre,Integer cantidadCopias, Integer idEditorial) {
+        return service.crear(nombre,cantidadCopias,idEditorial);
     }
 }
