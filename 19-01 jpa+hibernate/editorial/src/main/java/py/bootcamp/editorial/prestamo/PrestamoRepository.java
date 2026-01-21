@@ -8,6 +8,6 @@ import java.util.List;
 public interface PrestamoRepository extends JpaRepository<Prestamo, Integer> {
 
     // Esto intenta traer también los detalles en el mismo query (si tu Prestamo tiene la relación "detalles")
-    @EntityGraph(attributePaths = {"detalles", "detalles.libro", "profesor"})
+    @EntityGraph(attributePaths = {"detalles", "detalles.idLibro", "idProfesor"})
     List<Prestamo> findAll();
 }

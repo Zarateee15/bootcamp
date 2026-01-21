@@ -69,17 +69,63 @@ public class MenuConsola implements CommandLineRunner {
     }
 
     private void registrarPrestamo(Scanner sc) {
-        System.out.println("\n[Registrar prestamo] (aca llamas a PrestamoController cuando lo tengas)");
-        // ejemplo futuro:
-        // prestamoController.registrar(...);
+        System.out.println("\n-----------------------");
+        System.out.println("       Nuevo Prestamo");
+        System.out.println("-----------------------");
+        profesorController.listar().forEach(System.out::println);
+        System.out.println("-----------------------");
 
-        // por ahora podes ir guiando el flujo:
-        System.out.println("Primero elegi colegio/profesor/libro, etc...");
+        try {
+            System.out.print("Id del profesor: ");
+            Integer idProfesor = Integer.parseInt(sc.nextLine());
+
+            var items = new java.util.ArrayList<py.bootcamp.editorial.prestamo.LibroPrestamoItem>();
+
+            while (true) {
+                libroController.listar().forEach(System.out::println);
+                System.out.println("0- Salir");
+                System.out.println("-----------------------");
+                System.out.print("Id del libro: ");
+                Integer idLibro = Integer.parseInt(sc.nextLine());
+                if (idLibro == 0) break;
+
+                System.out.print("Cantidad a prestar: ");
+                Integer cant = Integer.parseInt(sc.nextLine());
+
+                items.add(new py.bootcamp.editorial.prestamo.LibroPrestamoItem(idLibro, cant));
+            }
+
+            System.out.println("Creado: " + prestamoController.registrar(idProfesor, items));
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private void listarPrestamos() {
-        System.out.println("\n[Listar prestamos]");
-        // prestamoController.listar().forEach(System.out::println);
+        System.out.println("\n-----------------------");
+        System.out.println("        Prestamos");
+        System.out.println("-----------------------");
+
+        var prestamos = prestamoController.listar();
+
+        if (prestamos.isEmpty()) {
+            System.out.println("No hay prestamos.");
+            return;
+        }
+
+        for (var p : prestamos) {
+            System.out.println("\nPrestamo #" + p.getId()
+                    + " | Fecha: " + p.getFechaPrestamo()
+                    + " | Profesor: " + p.getIdProfesor().getNombre()
+                    + " (ID " + p.getIdProfesor().getId() + ")");
+
+            System.out.println("Detalles:");
+            for (var d : p.getDetalles()) {
+                System.out.println("  - Libro: " + d.getIdLibro().getNombre()
+                        + " | Cantidad: " + d.getCantidad());
+            }
+        }
     }
 
     private int ingresarOpcion(Scanner sc) {
@@ -312,13 +358,16 @@ public class MenuConsola implements CommandLineRunner {
             switch (op) {
                 case 1 -> libroController.listar().forEach(System.out::println);
                 case 2 -> {
-                    System.out.print("Nombre del Curso: ");
-                    String nombre = sc.nextLine();
-                    try {
-                        System.out.println("Creado: " + libroController.crear(nombre));
-                    } catch (Exception e) {
-                        System.out.println("Error: " + e.getMessage());
-                    }
+                    System.out.print("Creando libro...."); // TODO: Agregar parte de editorial
+                    //System.out.print("Nombre del Libro: ");
+                    //String nombre = sc.nextLine();
+                    //System.out.print("Cantidad de copias: ");
+                    //Integer cantidadCopias = Integer.parseInt(sc.nextLine());
+                    //try {
+                    //    System.out.println("Creado: " + libroController.crear(nombre,cantidadCopias));
+                    //} catch (Exception e) {
+                    //    System.out.println("Error: " + e.getMessage());
+                    //}
                 }
                 default -> System.out.println("Opcion invalida");
             }

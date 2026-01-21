@@ -3,6 +3,7 @@ package py.bootcamp.editorial.detalleprestamo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import py.bootcamp.editorial.libro.Libro;
 import py.bootcamp.editorial.prestamo.Prestamo;
 
 @Getter
@@ -22,5 +23,7 @@ public class DetallePrestamo {
     @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
 
-
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) // ponelo false si en DB es NOT NULL
+    @JoinColumn(name = "\"idLibro\"", nullable = false)
+    private Libro idLibro;
 }
