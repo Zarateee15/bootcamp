@@ -1,0 +1,29 @@
+{
+  "info": {
+    "_postman_id": "763df795-c286-4265-8270-dec8714ad068",
+    "name": "Editorial",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Listar Asignaturas",
+      "id": "170be1cb-4682-4026-b533-58830a3433cb",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/asignaturas/listar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "asignaturas",
+            "listar"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -18,17 +18,15 @@ public class MenuConsola implements CommandLineRunner {
 
     private final ColegioController colegioController;
     private final ProfesorController profesorController;
-    private final AsignaturaController asignaturaController;
     private final AulaController aulaController;
     private final CursoController cursoController;
     private final EditorialController editorialController;
     private final LibroController libroController;
     private final PrestamoController prestamoController;
 
-    public MenuConsola(ColegioController colegioController, ProfesorController profesorController, AsignaturaController asignaturaController, AulaController aulaController, CursoController cursoController, EditorialController editorialController, LibroController libroController, PrestamoController prestamoController) {
+    public MenuConsola(ColegioController colegioController, ProfesorController profesorController, AulaController aulaController, CursoController cursoController, EditorialController editorialController, LibroController libroController, PrestamoController prestamoController) {
         this.colegioController = colegioController;
         this.profesorController = profesorController;
-        this.asignaturaController = asignaturaController;
         this.aulaController = aulaController;
         this.cursoController = cursoController;
         this.editorialController = editorialController;
@@ -156,7 +154,7 @@ public class MenuConsola implements CommandLineRunner {
             switch (op) {
                 case 1 -> menuColegios(sc);
                 case 2 -> menuProfes(sc);
-                case 3 -> menuAsignaturas(sc);
+                //case 3 -> menuAsignaturas(sc);
                 case 4 -> menuAulas(sc);
                 case 5 -> menuCursos(sc);
                 case 6 -> menuEditoriales(sc);
@@ -224,6 +222,7 @@ public class MenuConsola implements CommandLineRunner {
         }
     }
 
+    /*
     private void menuAsignaturas(Scanner sc) {
         while (true) {
             System.out.println("\n-------- Asignaturas --------");
@@ -251,7 +250,7 @@ public class MenuConsola implements CommandLineRunner {
                 default -> System.out.println("Opcion invalida");
             }
         }
-    }
+    }   */
 
     private void menuAulas(Scanner sc) {
         while (true) {
