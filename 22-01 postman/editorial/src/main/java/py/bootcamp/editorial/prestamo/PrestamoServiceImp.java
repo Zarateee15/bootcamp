@@ -34,25 +34,35 @@ public class PrestamoServiceImp implements PrestamoService{
 
     @Override
     @Transactional
-    public Prestamo registrarPrestamo(Integer idProfesor,
-                                             List<LibroPrestamoItem> libros) {
+    public Prestamo registrarPrestamo(PrestamoDto.PrestamoRequest request) {
 
         // Valida que los campos Profesor y Detalles (libros a prestar) no vengan nulos
-        if (idProfesor == null) throw new IllegalArgumentException("El ID del Profesor no puede ser null");
-        if (libros == null || libros.isEmpty()) throw new IllegalArgumentException("Tiene que haber al menos 1 detalle");
+        if (request == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Los datos no puede estar vacios");
+        }
+        if (request.idProfesor() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID del profesor no puede estar vacio");
+        }
+        if (request.items() == null || request.items().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debe haber por lo menos un detalle");
+        }
 
-        // Valida los detalles individualmente
-        for (LibroPrestamoItem libro : libros) {
-            if (libro == null) throw new IllegalArgumentException("Detalle inválido");
-            if (libro.idLibro() == null) throw new IllegalArgumentException("El ID del libro no puede ser null");
-            if (libro.cantidad() == null || libro.cantidad() <= 0) {
-                throw new IllegalArgumentException("Cantidad inválida para libro " + libro.idLibro());
+        // Valida el/los detalles
+        for (PrestamoDto.PrestamoDetalleRequest detalle : request.items()) {
+            if (detalle == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debe haber por lo menos un detalle");
+            }
+            if (detalle.idLibro() == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El ID del libro no puede estar vacio");
+            }
+            if (detalle.cantidad() == null || detalle.cantidad() <= 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Los datos no puede estar vacios" + detalle.idLibro());
             }
         }
 
         // Valida que exista el profesor
-        Profesor profesor = profesorRepo.findById(idProfesor)
-                .orElseThrow(() -> new IllegalArgumentException("Profesor no existe: " + idProfesor));
+        Profesor profesor = profesorRepo.findById(request.idProfesor())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Profesor no existe: " + request.idProfesor()));
 
         //-------------------------------------------------
         //                 Crea el prestamo
@@ -64,23 +74,23 @@ public class PrestamoServiceImp implements PrestamoService{
         prestamo = prestamoRepo.save(prestamo);
 
         // 2) Recorre los libros a alquilar
-        for (LibroPrestamoItem item : libros) {
+        for (PrestamoDto.PrestamoDetalleRequest detalle : request.items()) {
 
             // Valida que el libro seleccionado exista
-            Libro libro = libroRepo.findById(item.idLibro())
-                    .orElseThrow(() -> new IllegalArgumentException("Libro no existe: " + item.idLibro()));
+            Libro libro = libroRepo.findById(detalle.idLibro())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Libro no existe: " + detalle.idLibro()));
 
             // Valida que haya disponible la cantidad de libros solicitada
-            if (libro.getCantidadCopias() < item.cantidad()) {
-                throw new IllegalArgumentException(
+            if (libro.getCantidadCopias() < detalle.cantidad()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         "No hay copias suficientes de " + libro.getId() +
                                 ". Disponibles=" + libro.getCantidadCopias() +
-                                ", solicitadas=" + item.cantidad()
+                                ", solicitadas=" + detalle.cantidad()
                 );
             }
 
             // Resta la cantidad disponible del libro
-            libro.setCantidadCopias(libro.getCantidadCopias() - item.cantidad());
+            libro.setCantidadCopias(libro.getCantidadCopias() - detalle.cantidad());
             libroRepo.save(libro);
 
             //-------------------------------------------------
@@ -90,7 +100,7 @@ public class PrestamoServiceImp implements PrestamoService{
             DetallePrestamo det = new DetallePrestamo();
             det.setIdPrestamo(prestamo);
             det.setIdLibro(libro);
-            det.setCantidad(item.cantidad());
+            det.setCantidad(detalle.cantidad());
             detalleRepo.save(det);
         }
 
@@ -98,10 +108,11 @@ public class PrestamoServiceImp implements PrestamoService{
     }
 
     @Override
-    public List<Prestamo> listar() {
-        return prestamoRepo.findAll();
+    public List<PrestamoDto.PrestamoResponse> listar() {
+        return prestamoRepo.findAll().stream().map(this::toResponse).toList();
     }
 
+    @Override
     public Prestamo obtenerPorId(Integer id) {
         return prestamoRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -109,14 +120,60 @@ public class PrestamoServiceImp implements PrestamoService{
                     ));
     }
 
-    public Prestamo editarPrestamo (Integer id) {
-        validarProfesor(id);
-        Prestamo p = obtenerPorId(id);
-        p.setIdProfesor(id);
-        return prestamoRepo.save(p);
+    @Override
+    @Transactional
+    public Prestamo editarPrestamo (Integer id, Integer idProfe) {
+        if (idProfe == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El idProfe es obligatorio");
+        }
+
+        Profesor profesor = profesorRepo.findById(idProfe)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Profesor no existe: " + idProfe
+                ));
+
+        Prestamo prestamo = obtenerPorId(id);
+        prestamo.setIdProfesor(profesor);
+        return prestamoRepo.save(prestamo);
     }
 
-    public void validarProfesor(Integer id){
+    @Override
+    @Transactional
+    public void borrar (Integer id) {
+        Prestamo prestamo = obtenerPorId(id);
 
+        List<DetallePrestamo> detalles = prestamo.getDetalles();
+        if (detalles != null) {
+            for (DetallePrestamo detalle : detalles) {
+                if (detalle != null && detalle.getIdLibro() != null && detalle.getCantidad() != null) {
+                    Libro libro = detalle.getIdLibro();
+                    libro.setCantidadCopias(libro.getCantidadCopias() + detalle.getCantidad());
+                    libroRepo.save(libro);
+                }
+            }
+            // Evita error por FK: borra detalles primero
+            detalleRepo.deleteAll(detalles);
+        }
+        prestamoRepo.delete(prestamo);
     }
+
+    // Helper para formatear el JSON
+    public PrestamoDto.PrestamoResponse toResponse(Prestamo p) {
+        List<PrestamoDto.PrestamoDetalleResponse> detalles = (p.getDetalles() == null) ? List.of() // Si el prestamo no tiene detalles hace una lista vacia []
+                : p.getDetalles().stream()
+                .map(d -> new PrestamoDto.PrestamoDetalleResponse(
+                        d.getIdLibro().getNombre(),
+                        d.getCantidad()
+                ))
+                .toList();
+
+        return new PrestamoDto.PrestamoResponse(
+                p.getFechaPrestamo(),
+                p.getIdProfesor().getNombre(),
+                p.getIdProfesor().getCedula(),
+                detalles
+        );
+    }
+
 }

@@ -1,6 +1,13 @@
 package py.bootcamp.editorial.asignatura;
 
 public class AsignaturaDto {
-    // DTO para el requestBody
-    public record AsignaturaRequest (String nombre) { }
+    public record AsignaturaRequest (
+            String nombre
+    ) { }
+
+    // JSON a mostrar
+    public record AsignaturaResponse(
+            Integer idAsignatura,
+            String nombre
+    ) {}
 }

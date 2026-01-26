@@ -2,7 +2,6 @@ package py.bootcamp.editorial;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import py.bootcamp.editorial.asignatura.AsignaturaController;
 import py.bootcamp.editorial.aula.AulaController;
 import py.bootcamp.editorial.colegio.ColegioController;
 import py.bootcamp.editorial.curso.CursoController;
@@ -42,9 +41,9 @@ public class MenuConsola implements CommandLineRunner {
             int opc = menuPrincipal(sc);
             switch (opc) {
                 case 0 -> { return; }
-                case 1 -> registrarPrestamo(sc);
-                case 2 -> listarPrestamos();
-                case 3 -> submenuDatos(sc);
+                case 1 -> { return; }
+                case 2 -> { return; }
+                case 3 -> { return; }
                 default -> System.out.println("Opcion invalida");
             }
         }
@@ -66,6 +65,7 @@ public class MenuConsola implements CommandLineRunner {
         }
     }
 
+    /*
     private void registrarPrestamo(Scanner sc) {
         System.out.println("\n-----------------------");
         System.out.println("     Nuevo Prestamo");
@@ -77,7 +77,7 @@ public class MenuConsola implements CommandLineRunner {
             System.out.print("Id del profesor: ");
             Integer idProfesor = Integer.parseInt(sc.nextLine());
 
-            var items = new java.util.ArrayList<py.bootcamp.editorial.prestamo.LibroPrestamoItem>();
+            var items = new java.util.ArrayList<PrestamoDto>();
 
             while (true) {
                 libroController.listar().forEach(System.out::println);
@@ -90,7 +90,7 @@ public class MenuConsola implements CommandLineRunner {
                 System.out.print("Cantidad a prestar: ");
                 Integer cant = Integer.parseInt(sc.nextLine());
 
-                items.add(new py.bootcamp.editorial.prestamo.LibroPrestamoItem(idLibro, cant));
+                items.add(new PrestamoDto(idLibro, cant));
             }
 
             System.out.println("Creado: " + prestamoController.registrar(idProfesor, items));
@@ -222,7 +222,6 @@ public class MenuConsola implements CommandLineRunner {
         }
     }
 
-    /*
     private void menuAsignaturas(Scanner sc) {
         while (true) {
             System.out.println("\n-------- Asignaturas --------");
@@ -250,7 +249,7 @@ public class MenuConsola implements CommandLineRunner {
                 default -> System.out.println("Opcion invalida");
             }
         }
-    }   */
+    }
 
     private void menuAulas(Scanner sc) {
         while (true) {
@@ -380,5 +379,5 @@ public class MenuConsola implements CommandLineRunner {
                 default -> System.out.println("Opcion invalida");
             }
         }
-    }
+    }*/
 }

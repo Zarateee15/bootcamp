@@ -1,5 +1,6 @@
 package py.bootcamp.editorial.prestamo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class Prestamo {
     private Profesor idProfesor;
 
     @OneToMany(mappedBy = "idPrestamo", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<DetallePrestamo> detalles;
 
 

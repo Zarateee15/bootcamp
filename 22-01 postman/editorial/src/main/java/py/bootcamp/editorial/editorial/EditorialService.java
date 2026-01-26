@@ -1,27 +1,13 @@
 package py.bootcamp.editorial.editorial;
 
-import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
-public class EditorialService {
-
-    private final EditorialRepository repo;
-
-    public EditorialService(EditorialRepository repo) {
-        this.repo = repo;
-    }
-
-    public List<Editorial> listar() {
-        return repo.findAll();
-    }
-
-    public Editorial crear(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío");
-        }
-        Editorial e = new Editorial();
-        e.setNombre(nombre.trim());
-        return repo.save(e);
-    }
+public interface EditorialService {
+    Editorial crear(EditorialDto.EditorialRequest request);
+    List<EditorialDto.EditorialResponse> listar();
+    Editorial obtenerPorId(Integer id);
+    Editorial editar (Integer id, String nombre);
+    void borrar (Integer id);
+    void validarNombre (String nombre);
+    EditorialDto.EditorialResponse toResponse (Editorial c);
 }

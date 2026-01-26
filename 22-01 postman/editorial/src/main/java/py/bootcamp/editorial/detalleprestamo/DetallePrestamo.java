@@ -1,5 +1,6 @@
 package py.bootcamp.editorial.detalleprestamo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class DetallePrestamo {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonBackReference
     @JoinColumn(name = "\"idPrestamo\"", nullable = false)
     private Prestamo idPrestamo;
 

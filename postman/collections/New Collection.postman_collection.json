@@ -6,24 +6,992 @@
   },
   "item": [
     {
-      "name": "Listar Asignaturas",
-      "id": "170be1cb-4682-4026-b533-58830a3433cb",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/api/asignaturas/listar",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "api",
-            "asignaturas",
-            "listar"
-          ]
+      "name": "Asignaturas",
+      "item": [
+        {
+          "name": "Listar Asignaturas",
+          "id": "170be1cb-4682-4026-b533-58830a3433cb",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/asignaturas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "asignaturas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar una Asignatura",
+          "id": "aba38207-c22a-4116-bf86-9863a633e2b2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/asignaturas/40",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "asignaturas",
+                "40"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Asignatura",
+          "id": "47a910cb-346e-4699-9dc2-8eb933e1ccab",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Electronica Analogica II\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/asignaturas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "asignaturas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Asignatura",
+          "id": "145920df-a885-4ac0-a9a9-081d5586a6cc",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Digital\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/asignaturas/47",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "asignaturas",
+                "47"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Asignatura",
+          "id": "093e882a-9964-4195-9b48-fb3bbb545f78",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/asignaturas/37",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "asignaturas",
+                "37"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ],
+      "id": "19232943-60e7-43dc-b160-37d4510a329f"
+    },
+    {
+      "name": "Prestamos",
+      "item": [
+        {
+          "name": "Listar Prestamos",
+          "id": "592b6299-9f34-4f20-85cc-f119114c9f93",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/prestamos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar un Prestamo",
+          "id": "d79d8f72-45d7-4421-ab77-73003903ce41",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/prestamos/buscar/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "prestamos",
+                "buscar",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Prestamo",
+          "id": "838df084-040f-4f9f-8a67-8da0cb1d9e5c",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"idProfesor\": 3,\r\n    \"items\": [\r\n        {\r\n            \"idLibro\": 1,\r\n            \"cantidad\": 1\r\n        },\r\n        {\r\n            \"idLibro\": 2,\r\n            \"cantidad\": 1\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/prestamos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Profesor de un Prestamo",
+          "id": "32507ea5-9686-4848-bc91-bd8d00a8978a",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idProfesor\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/prestamos/editar/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "prestamos",
+                "editar",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Prestamo",
+          "id": "cf1f373e-30b7-4e9a-b512-ce082f271abc",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/prestamos/borrar/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "prestamos",
+                "borrar",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "f36f36f2-8c09-4c2d-a400-d92fb26975ec"
+    },
+    {
+      "name": "Colegios",
+      "item": [
+        {
+          "name": "Listar Colegios",
+          "id": "32966a6e-cabc-44b6-b56a-58b393b684a2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/colegios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "colegios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar un Colegio",
+          "id": "0574e991-da9d-4ed2-b0ea-2e97e4e3e732",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/colegios/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "colegios",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Colegio",
+          "id": "46bfe0da-28a7-41bc-b9fe-d2aecd532e87",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Colegio Tecnico Nacional\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/colegios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "colegios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Nombre de un Colegio",
+          "id": "08f962e4-f915-42c1-b038-53f8877ab7ff",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Instituto Metropolitano\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/colegios/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "colegios",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Colegio",
+          "id": "87c90ede-4447-4c5c-a776-8bf56cae5c2a",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/colegios/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "colegios",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7bcb5ea8-0d95-4c10-8d33-37ecf5f576c1"
+    },
+    {
+      "name": "Aulas",
+      "item": [
+        {
+          "name": "Listar Aulas",
+          "id": "1388226a-ce0b-4d8b-83b5-613044474ce7",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/aulas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "aulas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar un Aula",
+          "id": "8c6a4eda-7395-4fc6-b015-25d73ec65590",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/aulas/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "aulas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Aula",
+          "id": "2539cc68-040b-4b13-b411-bb222a147871",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"A-03\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/aulas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "aulas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Aula",
+          "id": "6df0c737-6388-45e6-a752-df89bff716d6",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"A-03\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/aulas/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "aulas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Aula",
+          "id": "3f41375b-027a-4d6b-933c-23aae2da972c",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/aulas/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "aulas",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "fb294ba7-bcd5-467f-bd40-192f8212057e"
+    },
+    {
+      "name": "Cursos",
+      "item": [
+        {
+          "name": "Listar Cursos",
+          "id": "943d041d-1e4a-46d4-a267-26099a9ea387",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cursos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cursos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar un Curso",
+          "id": "b2061b02-d4ae-4763-912f-b13119d95c0e",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cursos/3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cursos",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Curso",
+          "id": "ec2bf930-a880-4e70-a2d3-e6c4cb8b2a35",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"3º Año\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cursos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cursos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Curso",
+          "id": "cf4b9fbd-8772-4082-8bd0-479c2b8c3370",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Curso de Programación\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cursos/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cursos",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Curso",
+          "id": "71ae781b-36bb-466f-8465-0d58df4c83f8",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cursos/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cursos",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "3e1e05c3-1a9c-4b0c-aebe-e2be3481d1b7"
+    },
+    {
+      "name": "Profesores",
+      "item": [
+        {
+          "name": "Listar Profesores",
+          "id": "2f7b3804-0ca3-4afe-909d-02072bd1d573",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/profesores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "profesores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar un Profesor",
+          "id": "b4890c8e-8d59-481a-a91a-8b809cecc19a",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/profesores/3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "profesores",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Profesor",
+          "id": "bc42e8ba-b444-4c48-a0fe-23b236f17229",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Francisco Peralta\",\r\n    \"cedula\": 4362731\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/profesores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "profesores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Profesor",
+          "id": "c2d10626-b4c8-4fdc-a10a-efccddbce248",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Juan Medina\",\r\n    \"cedula\": 5326321\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/profesores/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "profesores",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Profesor",
+          "id": "03adef29-5bbe-42c5-8e8e-380ad49e67ef",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/profesores/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "profesores",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "2454a884-e8c0-4f94-9d19-9b27d0f561f5"
+    },
+    {
+      "name": "Editoriales",
+      "item": [
+        {
+          "name": "Listar Editoriales",
+          "id": "7d5fdb6a-4f37-4fa7-a288-de5741e36806",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/editoriales",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "editoriales"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar una Editorial",
+          "id": "c3b6dd7d-6530-41f7-8c94-991bc26ff3a7",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/editoriales/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "editoriales",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Editorial",
+          "id": "b596e16d-53d3-4bd0-acb4-8ebca478dac5",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Alianza\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/editoriales",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "editoriales"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Editorial",
+          "id": "08e59713-2c8f-4227-b401-b89a0cadaa18",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Alianza S.A\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/editoriales/35",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "editoriales",
+                "35"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Editorial",
+          "id": "b97ffe4c-764c-4911-b971-465271f7d078",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/editoriales/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "editoriales",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7bdf93b3-a7d7-4ab8-8b9d-4f91b17eb7f0"
+    },
+    {
+      "name": "Libros",
+      "item": [
+        {
+          "name": "Listar Libros",
+          "id": "091d601f-2e32-4ba7-bd56-54cdcc57aa5f",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/libros",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "libros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar un Libro",
+          "id": "72612561-68c2-4605-afc1-76e09e3c7f77",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/libros/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "libros",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Libro",
+          "id": "7d77c7ef-a1e7-4409-9aea-f31792457ed6",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"El Señor de los Anillos\",\r\n    \"cantidadCopias\": 16,\r\n    \"idEditorial\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/libros",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "libros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar Libro",
+          "id": "219891ab-b508-4926-88a5-c8398f502d29",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombre\": \"Historia del Universo\",\r\n    \"cantidadCopias\": 10,\r\n    \"idEditorial\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/libros/3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "libros",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Libro",
+          "id": "69ebdf2c-adfd-4947-aed8-ec45924c4f0a",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/libros/34",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "libros",
+                "34"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "b22838ec-496d-4ae2-99ef-a6f8aa912dd6"
     }
   ]
 }
