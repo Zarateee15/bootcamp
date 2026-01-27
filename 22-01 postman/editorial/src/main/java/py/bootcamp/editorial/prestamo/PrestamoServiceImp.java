@@ -4,6 +4,14 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import py.bootcamp.editorial.asignatura.Asignatura;
+import py.bootcamp.editorial.asignatura.AsignaturaRepository;
+import py.bootcamp.editorial.aula.Aula;
+import py.bootcamp.editorial.aula.AulaRepository;
+import py.bootcamp.editorial.colegio.Colegio;
+import py.bootcamp.editorial.colegio.ColegioRepository;
+import py.bootcamp.editorial.curso.Curso;
+import py.bootcamp.editorial.curso.CursoRepository;
 import py.bootcamp.editorial.detalleprestamo.DetallePrestamo;
 import py.bootcamp.editorial.detalleprestamo.DetalleRepository;
 import py.bootcamp.editorial.libro.Libro;
@@ -20,15 +28,23 @@ public class PrestamoServiceImp implements PrestamoService{
     private final PrestamoRepository prestamoRepo;
     private final DetalleRepository detalleRepo;
     private final ProfesorRepository profesorRepo;
+    private final ColegioRepository colegioRepo;
+    private final AsignaturaRepository asignaturaRepo;
+    private final AulaRepository aulaRepo;
+    private final CursoRepository cursoRepo;
     private final LibroRepository libroRepo;
 
     public PrestamoServiceImp(PrestamoRepository prestamoRepo,
                               DetalleRepository detalleRepo,
-                              ProfesorRepository profesorRepo,
+                              ProfesorRepository profesorRepo, ColegioRepository colegioRepo, AsignaturaRepository asignaturaRepo, AulaRepository aulaRepo, CursoRepository cursoRepo,
                               LibroRepository libroRepo) {
         this.prestamoRepo = prestamoRepo;
         this.detalleRepo = detalleRepo;
         this.profesorRepo = profesorRepo;
+        this.colegioRepo = colegioRepo;
+        this.asignaturaRepo = asignaturaRepo;
+        this.aulaRepo = aulaRepo;
+        this.cursoRepo = cursoRepo;
         this.libroRepo = libroRepo;
     }
 
@@ -40,7 +56,8 @@ public class PrestamoServiceImp implements PrestamoService{
         if (request == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Los datos no puede estar vacios");
         }
-        if (request.idProfesor() == null) {
+        if (request.idProfesor() == null || request.idColegio() == null || request.idAsignatura() == null
+        || request.idAula() == null || request.idCurso() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID del profesor no puede estar vacio");
         }
         if (request.items() == null || request.items().isEmpty()) {
@@ -60,9 +77,21 @@ public class PrestamoServiceImp implements PrestamoService{
             }
         }
 
-        // Valida que exista el profesor
+        // Valida que existan el profesor, colegio, asignatura, aula y curso
         Profesor profesor = profesorRepo.findById(request.idProfesor())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Profesor no existe: " + request.idProfesor()));
+
+        Colegio colegio = colegioRepo.findById(request.idColegio())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Colegio no existe: " + request.idColegio()));
+
+        Asignatura asignatura = asignaturaRepo.findById(request.idAsignatura())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Asignatura no existe: " + request.idAsignatura()));
+
+        Aula aula = aulaRepo.findById(request.idAula())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Aula no existe: " + request.idAula()));
+
+        Curso curso = cursoRepo.findById(request.idCurso())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Curso no existe: " + request.idCurso()));
 
         //-------------------------------------------------
         //                 Crea el prestamo
@@ -71,6 +100,10 @@ public class PrestamoServiceImp implements PrestamoService{
         Prestamo prestamo = new Prestamo();
         prestamo.setFechaPrestamo(LocalDate.now());
         prestamo.setIdProfesor(profesor);
+        prestamo.setIdColegio(colegio);
+        prestamo.setIdAsignatura(asignatura);
+        prestamo.setIdAula(aula);
+        prestamo.setIdCurso(curso);
         prestamo = prestamoRepo.save(prestamo);
 
         // 2) Recorre los libros a alquilar
@@ -122,9 +155,9 @@ public class PrestamoServiceImp implements PrestamoService{
 
     @Override
     @Transactional
-    public Prestamo editarPrestamo (Integer id, Integer idProfe) {
-        if (idProfe == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El idProfe es obligatorio");
+    public Prestamo editarPrestamo (Integer id, Integer idProfe, Integer idColegio, Integer idAsignatura, Integer idAula, Integer idCurso) {
+        if (idProfe == null || idColegio == null || idAsignatura == null || idAula == null || idCurso == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Todos los IDs son obligatorios");
         }
 
         Profesor profesor = profesorRepo.findById(idProfe)
@@ -133,8 +166,29 @@ public class PrestamoServiceImp implements PrestamoService{
                         "Profesor no existe: " + idProfe
                 ));
 
+        Colegio colegio = colegioRepo.findById(idColegio)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Colegio no existe: " + idColegio));
+
+        Asignatura asignatura = asignaturaRepo.findById(idAsignatura)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Asignatura no existe: " + idAsignatura));
+
+        Aula aula = aulaRepo.findById(idAula)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Aula no existe: " + idAula));
+
+        Curso curso = cursoRepo.findById(idCurso)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Curso no existe: " + idCurso));
+
+
         Prestamo prestamo = obtenerPorId(id);
         prestamo.setIdProfesor(profesor);
+        prestamo.setIdColegio(colegio);
+        prestamo.setIdAsignatura(asignatura);
+        prestamo.setIdAula(aula);
+        prestamo.setIdCurso(curso);
         return prestamoRepo.save(prestamo);
     }
 
@@ -172,6 +226,10 @@ public class PrestamoServiceImp implements PrestamoService{
                 p.getFechaPrestamo(),
                 p.getIdProfesor().getNombre(),
                 p.getIdProfesor().getCedula(),
+                p.getIdColegio().getNombre(),
+                p.getIdAsignatura().getNombre(),
+                p.getIdAula().getNombre(),
+                p.getIdCurso().getNombre(),
                 detalles
         );
     }

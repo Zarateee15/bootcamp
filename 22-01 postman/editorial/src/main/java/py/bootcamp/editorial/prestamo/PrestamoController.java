@@ -39,14 +39,14 @@ public class PrestamoController {
     @GetMapping("/{id}")
     public ApiResponse<PrestamoDto.PrestamoResponse> obtenerPorId(@PathVariable Integer id) {
         Prestamo p = service.obtenerPorId(id);
-        return ApiResponse.ok("Préstamo modificado correctamente", service.toResponse(p));
+        return ApiResponse.ok("Préstamo encontrado", service.toResponse(p));
     }
 
     // Editar préstamo (cambiar profesor)
     // PUT /api/prestamos/{id}
     @PutMapping("/{id}")
     public ApiResponse<PrestamoDto.PrestamoResponse> editar(@PathVariable Integer id, @RequestBody PrestamoDto.EditarPrestamoRequest req) {
-        Prestamo editado = service.editarPrestamo(id, req.idProfesor());
+        Prestamo editado = service.editarPrestamo(id, req.idProfesor(), req.idColegio(), req.idAsignatura(), req.idAula(), req.idCurso());
         return ApiResponse.ok("Préstamo modificado correctamente", service.toResponse(editado));
     }
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Login</h1>
+
+<div th:if="${param.error}">
+  Usuario o contraseña incorrectos
+</div>
+<div th:if="${param.logout}">
+  Sesión cerrada
+</div>
+
+<form method="post" action="/login">
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+  <div>
+    <input name="username" placeholder="usuario"/>
+  </div>
+  <div>
+    <input name="password" type="password" placeholder="contraseña"/>
+  </div>
+  <button type="submit">Entrar</button>
+</form>
+
+</body>
+</html>

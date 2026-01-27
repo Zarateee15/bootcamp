@@ -12,6 +12,9 @@
           "name": "Listar Asignaturas",
           "id": "170be1cb-4682-4026-b533-58830a3433cb",
           "request": {
+            "auth": {
+              "type": "bearer"
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -111,14 +114,14 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/asignaturas/37",
+              "raw": "{{baseUrl}}/api/asignaturas/42",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "asignaturas",
-                "37"
+                "42"
               ]
             }
           },
@@ -134,6 +137,21 @@
           "name": "Listar Prestamos",
           "id": "592b6299-9f34-4f20-85cc-f119114c9f93",
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "body": {
@@ -162,17 +180,31 @@
           "name": "Buscar un Prestamo",
           "id": "d79d8f72-45d7-4421-ab77-73003903ce41",
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/prestamos/buscar/1",
+              "raw": "{{baseUrl}}/api/prestamos/1",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "prestamos",
-                "buscar",
                 "1"
               ]
             }
@@ -187,7 +219,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"idProfesor\": 3,\r\n    \"items\": [\r\n        {\r\n            \"idLibro\": 1,\r\n            \"cantidad\": 1\r\n        },\r\n        {\r\n            \"idLibro\": 2,\r\n            \"cantidad\": 1\r\n        }\r\n    ]\r\n}",
+              "raw": "{\r\n    \"idProfesor\": 1,\r\n    \"idColegio\": 35,\r\n    \"idAsignatura\": 2,\r\n    \"idAula\": 3,\r\n    \"idCurso\": 3,\r\n    \"items\": [\r\n        {\r\n            \"idLibro\": 2,\r\n            \"cantidad\": 1\r\n        },\r\n        {\r\n            \"idLibro\": 4,\r\n            \"cantidad\": 5\r\n        }\r\n    ]\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -195,12 +227,11 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/api/prestamos",
+              "raw": "{{baseUrl}}/prestamos",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "api",
                 "prestamos"
               ]
             }
@@ -215,7 +246,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"idProfesor\": 2\r\n}",
+              "raw": "{\r\n    \"idProfesor\": 1,\r\n    \"idColegio\": 1,\r\n    \"idAsignatura\": 3,\r\n    \"idAula\": 3,\r\n    \"idCurso\": 3\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -223,14 +254,12 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/api/prestamos/editar/1",
+              "raw": "{{baseUrl}}/prestamos/1",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "api",
                 "prestamos",
-                "editar",
                 "1"
               ]
             }
@@ -244,15 +273,13 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/prestamos/borrar/34",
+              "raw": "{{baseUrl}}/prestamos/42",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "api",
                 "prestamos",
-                "borrar",
-                "34"
+                "42"
               ]
             }
           },
@@ -268,6 +295,21 @@
           "name": "Listar Colegios",
           "id": "32966a6e-cabc-44b6-b56a-58b393b684a2",
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -307,6 +349,21 @@
           "name": "Crear Colegio",
           "id": "46bfe0da-28a7-41bc-b9fe-d2aecd532e87",
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
@@ -364,17 +421,32 @@
           "name": "Eliminar Colegio",
           "id": "87c90ede-4447-4c5c-a776-8bf56cae5c2a",
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/colegios/34",
+              "raw": "{{baseUrl}}/api/colegios/36",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "colegios",
-                "34"
+                "36"
               ]
             }
           },
@@ -992,6 +1064,40 @@
         }
       ],
       "id": "b22838ec-496d-4ae2-99ef-a6f8aa912dd6"
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Crear Usuario",
+          "id": "55a8e71f-cd64-4e64-9694-a89dec4236b2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7c4d6fa8-b928-47dd-a285-4c1df8556078"
     }
   ]
 }

@@ -7,6 +7,10 @@ import java.util.List;
 public class PrestamoDto {
     public record PrestamoRequest (
             Integer idProfesor,
+            Integer idColegio,
+            Integer idAsignatura,
+            Integer idAula,
+            Integer idCurso,
             List<PrestamoDetalleRequest> items
     ) { }
 
@@ -16,19 +20,27 @@ public class PrestamoDto {
     ){}
 
     public record EditarPrestamoRequest(
-            Integer idProfesor
+            Integer idProfesor,
+            Integer idColegio,
+            Integer idAsignatura,
+            Integer idAula,
+            Integer idCurso
     ) {}
 
     // JSON a mostrar
     public record PrestamoDetalleResponse(
-            String nombreLibro,
-            Integer cantidad
+            String Libro,
+            Integer Cantidad
     ) {}
 
     public record PrestamoResponse(
-            LocalDate fechaPrestamo,
-            String nombreProfesor,
-            BigDecimal cedula,
-            List<PrestamoDetalleResponse> detalles
+            LocalDate FechaPrestamo,
+            String Profesor,
+            BigDecimal Cedula,
+            String Colegio,
+            String Asignatura,
+            String Aula,
+            String Curso,
+            List<PrestamoDetalleResponse> Detalles
     ) {}
 }
