@@ -1,4 +1,4 @@
-package py.bootcamp.editorial.usuario;
+package py.bootcamp.editorial.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

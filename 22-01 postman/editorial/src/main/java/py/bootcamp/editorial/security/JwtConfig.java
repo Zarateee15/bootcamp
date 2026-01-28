@@ -1,0 +1,50 @@
+package py.bootcamp.editorial.security;
+
+import com.nimbusds.jose.jwk.source.ImmutableSecret;
+import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+
+@Configuration
+public class JwtConfig {
+
+    /*
+            JWT (Json Web Token)
+        Consta de 3 partes:
+        - Header: Algoritmo de Firma (HS256) y tipo (JWT)
+        - Payload: claims: username, roles, exp, etc.)
+        - Signature(firma): HS256 es un tipo de firma con clave secreta y Hash
+                            calcula un “hash” especial usando HS256 + tu jwt.key sobre esas partes
+     */
+    @Value("${jwt.key}")
+    private String jwtKey;
+
+    // Al hacer login
+    // Crea el token agarrando claims (usuario, rol), lo firma y devuelve un string JWT
+    @Bean
+    JwtEncoder jwtEncoder() {
+        return new NimbusJwtEncoder(new ImmutableSecret<SecurityContext>(
+                jwtKey.getBytes(StandardCharsets.UTF_8)
+        ));
+    }
+
+    // Spring Security lo ejecuta en cada request
+    // Valida los tokens que llegan: si coincide con jwt.key y la expiración
+    @Bean
+    JwtDecoder jwtDecoder() {
+        SecretKey key = new SecretKeySpec(jwtKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        return NimbusJwtDecoder.withSecretKey(key)
+                .macAlgorithm(MacAlgorithm.HS256) // algoritmo que se uso para firmar
+                .build();
+    }
+}

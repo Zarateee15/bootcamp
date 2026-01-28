@@ -13,7 +13,14 @@
           "id": "170be1cb-4682-4026-b533-58830a3433cb",
           "request": {
             "auth": {
-              "type": "bearer"
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlZGl0b3JpYWwtYXBpIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3Njk2MTIxNzQsImlhdCI6MTc2OTYxMTI3NCwicm9sZXMiOlsiQURNSU4iXX0.msxHbyVDwDIStZuS-ccQ4sUGxoyVIVGHo-8lce7-Bw0",
+                  "type": "string"
+                }
+              ]
             },
             "method": "GET",
             "header": [],
@@ -54,11 +61,26 @@
           "name": "Crear Asignatura",
           "id": "47a910cb-346e-4699-9dc2-8eb933e1ccab",
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "user",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "user",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"nombre\": \"Electronica Analogica II\"\r\n}",
+              "raw": "{\r\n    \"nombre\": \"Laboratorio de Analogica\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -111,17 +133,41 @@
           "name": "Eliminar Asignatura",
           "id": "093e882a-9964-4195-9b48-fb3bbb545f78",
           "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{baseUrl}}/api/asignaturas/42",
+              "raw": "{{baseUrl}}/api/asignaturas/45",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "asignaturas",
-                "42"
+                "45"
               ]
             }
           },
@@ -1098,6 +1144,35 @@
         }
       ],
       "id": "7c4d6fa8-b928-47dd-a285-4c1df8556078"
+    },
+    {
+      "name": "Login",
+      "id": "b2a0228b-5cac-4d55-aa50-fc4da3785c09",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"username\": \"admin\", \"password\": \"admin\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
